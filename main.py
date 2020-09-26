@@ -7,17 +7,17 @@ def Download():
     global urlString
     urlString = urlEntry.get()
 
-    if not os.path.exists('./downloads'):
-        os.makedirs('./downloads')
+    #if not os.path.exists('./downloads'):
+        #os.makedirs('./downloads')
 
     #to get info of the url inputted on the entry
-    video_info = youtube_dl.YoutubeDL().extract_info(url= urlString, download = False)
+    video_info = youtube_dl.YoutubeDL().extract_info(url = urlString, download = False)
     filename = f"{video_info['title']}" + ".%(ext)s"
     options = {
         'format': 'bestaudio/best',
         'keepvideo': False,
-        'outtmpl': '~/Desktop/Python Projects/YoutubeToMP3/downloads/' + filename,
-        'postprocessors':[{
+        'outtmpl': 'downloads/' + filename,
+        'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',
             'preferredquality': '192',
@@ -28,10 +28,8 @@ def Download():
     with youtube_dl.YoutubeDL(options) as ydl:
         ydl.download([video_info['webpage_url']])
 
-    urlEntry.delete(0,END)
+    urlEntry.delete(0, END)
     urlEntry.insert(0, "")
-
-
 
 
 #GUI stuff
