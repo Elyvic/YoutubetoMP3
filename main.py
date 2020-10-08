@@ -31,6 +31,12 @@ def Download():
     urlEntry.delete(0, END)
     urlEntry.insert(0, "")
 
+def OpenFolder():
+    path = "downloads"
+    path = os.path.realpath(path)
+    os.startfile(path)
+
+
 
 #GUI stuff
 urlString = " "
@@ -43,10 +49,12 @@ root.resizable(False, False)
 
 urlLabel = Label(root, text = "URL")
 urlEntry = Entry(root, textvariable = " ", width = 50)
-downloadButton = Button(root, text= "Download", command = Download)
+downloadButton = Button(root, text = "Download", command = Download)
+folderButton = Button(root, text = "Folder", command = OpenFolder)
 
 urlLabel.place(x = 30, y = 30)
 urlEntry.place(x = 60, y = 30)
 downloadButton.place(x = 160, y = 60)
+folderButton.place(x = 355, y = 95)
 
 mainloop()
