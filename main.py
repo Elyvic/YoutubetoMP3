@@ -1,10 +1,15 @@
 from tkinter import *
+from tkinter import filedialog
 import youtube_dl
 import os
 
-def Download():
+folder_name = ""
+
+
+def Mp3Download():
+    global folder_name
     #grab the string in the entry box
-    global urlString
+    #global urlString
     urlString = urlEntry.get()
 
     #if not os.path.exists('./downloads'):
@@ -16,7 +21,7 @@ def Download():
     options = {
         'format': 'bestaudio/best',
         'keepvideo': False,
-        'outtmpl': 'downloads/' + filename,
+        'outtmpl': folder_name + "/" + filename,
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'mp3',
@@ -31,11 +36,20 @@ def Download():
     urlEntry.delete(0, END)
     urlEntry.insert(0, "")
 
+
+def Mp4Download():
+    #do stuff below
+    print("download video")
+
 def OpenFolder():
-    path = "downloads"
+    global folder_name
+    path = folder_name
     path = os.path.realpath(path)
     os.startfile(path)
 
+def SaveFolder():
+    global folder_name
+    folder_name = filedialog.askdirectory()
 
 
 #GUI stuff
@@ -47,14 +61,20 @@ root.title("Youtube MP3 downloader")
 root.geometry("400x120")
 root.resizable(False, False)
 
+photo = PhotoImage(file = r"Resources/SaveButton.png")
+
 urlLabel = Label(root, text = "URL")
 urlEntry = Entry(root, textvariable = " ", width = 50)
-downloadButton = Button(root, text = "Download", command = Download)
+mp3Button = Button(root, text = "Mp3", command = Mp3Download)
+mp4Button = Button(root, text = "Mp4", command = Mp4Download)
 folderButton = Button(root, text = "Folder", command = OpenFolder)
+fileButton = Button(root, command = SaveFolder, image = photo)
 
 urlLabel.place(x = 30, y = 30)
 urlEntry.place(x = 60, y = 30)
-downloadButton.place(x = 160, y = 60)
+mp3Button.place(x = 160, y = 60)
+mp4Button.place(x = 195, y = 60)
 folderButton.place(x = 355, y = 95)
+fileButton.place(x = 366, y = 28)
 
 mainloop()
