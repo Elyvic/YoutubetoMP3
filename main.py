@@ -61,20 +61,23 @@ root.title("Youtube MP3 downloader")
 root.geometry("400x120")
 root.resizable(False, False)
 
-photo = PhotoImage(file = r"Resources/SaveButton.png")
+savePhoto = PhotoImage(file = r"Resources/SaveButton.png")
+folderPhoto = PhotoImage(file = r"Resources/folderButton.png")
+
 
 urlLabel = Label(root, text = "URL")
 urlEntry = Entry(root, textvariable = " ", width = 50)
 mp3Button = Button(root, text = "Mp3", command = Mp3Download)
 mp4Button = Button(root, text = "Mp4", command = Mp4Download)
-folderButton = Button(root, text = "Folder", command = OpenFolder)
-fileButton = Button(root, command = SaveFolder, image = photo)
+folderButton = Button(root, command = OpenFolder, image = folderPhoto)
+fileButton = Button(root, command = SaveFolder, image = savePhoto)
+
 
 urlLabel.place(x = 30, y = 30)
 urlEntry.place(x = 60, y = 30)
 mp3Button.place(x = 160, y = 60)
 mp4Button.place(x = 195, y = 60)
-folderButton.place(x = 355, y = 95)
+folderButton.place(x = 375, y = 95)
 fileButton.place(x = 366, y = 28)
 
 mainloop()
